@@ -1,3 +1,3 @@
 #mylabs
 
-this is my lab page
+Stores labs for CS14
