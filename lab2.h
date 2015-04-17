@@ -9,11 +9,11 @@
 
 // template <class Type, class Alloc = allocator<Type>> class forward_list;
 
-// typedef int Type;
+typedef int Type;
 
 using namespace std;
 
-template <typename Type>
+// template <typename Type>
 
 class Node
 {
@@ -21,17 +21,17 @@ class Node
     
     private:
         Type data;
-        Node<Type> *next;
+        Node *next;
         
     public:
-        Node<Type>(Type data);
+        Node(Type data);
 };
 
 class List
 {
     private:
-        Node<Type> *head;
-        Node<Type> *tail;
+        Node *head;
+        Node *tail;
     
     public:
         List();
@@ -57,7 +57,7 @@ List::List(List &list)
 {
     head = 0;
     tail = 0;
-    for (Node<Type> *curr = list.head; curr != 0; curr = curr->next)
+    for (Node *curr = list.head; curr != 0; curr = curr->next)
     {
         push(curr->data);
     }
@@ -67,7 +67,7 @@ List::~List()
 {
     while(head != NULL)
     {
-        Node<Type> *curr = head;
+        Node *curr = head;
         head = head->next;
         delete curr;
     }
@@ -89,7 +89,7 @@ List::List(const string &str)
 
 void List::display() const
 {
-    Node<Type> *temp = head;
+    Node *temp = head;
 
     if(head == 0)
     {
@@ -118,7 +118,7 @@ void List::push(char val)
     
     else
     {
-        Node<Type> *end = new Node(val);
+        Node *end = new Node(val);
         tail->next = end;
         tail = end;
     }
@@ -140,7 +140,7 @@ void List::elementSwap(int pos)
     
     int sz = 0; //size variable
     
-    for (Node<Type> *curr = head; curr != 0; curr = curr->next)
+    for (Node *curr = head; curr != 0; curr = curr->next)
     {
         ++sz; //increments to correct size
     }
@@ -159,7 +159,7 @@ void List::elementSwap(int pos)
             cout << "Position out of bounds, cancelling swap" << endl;
             return;
         }
-        Node<Type> *temp = head; //flips nodes
+        Node *temp = head; //flips nodes
         head = head->next;
         head->next = temp;
         temp->next = 0;
@@ -168,8 +168,8 @@ void List::elementSwap(int pos)
     
     if (pos == 0) //flips the first and second node
     {
-        Node<Type> *temp = head; //sets head and second node
-        Node<Type> *nxt = temp->next;
+        Node *temp = head; //sets head and second node
+        Node *nxt = temp->next;
         
         head = nxt; //reassigns arrows
         temp->next = nxt->next;
@@ -180,8 +180,8 @@ void List::elementSwap(int pos)
     
     //cases for all other sized nodes and positions
     
-    Node<Type> *temp = head; //saves current and previous nodes
-    Node<Type> *prev = head;
+    Node *temp = head; //saves current and previous nodes
+    Node *prev = head;
     
     for (int i = 0; i < pos - 1; ++i) //finds correct position
     {
@@ -190,7 +190,7 @@ void List::elementSwap(int pos)
     }
     
     temp = temp->next;
-    Node<Type> *nxt = temp->next; //saves next node
+    Node *nxt = temp->next; //saves next node
     
     if(nxt->next == 0) //resets tail if needed
     {
@@ -246,7 +246,7 @@ int primeCount(forward_list<int> lst, forward_list<Type>::iterator &itr)
 
 int primeCount(forward_list<int> lst)
 {
-    forward_list<Type>::iterator itr = lst.begin(); //starts iterator at beg
+    forward_list<int>::iterator itr = lst.begin(); //starts iterator at beg
     
     int total = primeCount(lst, itr); //calls recursive helper function
     
