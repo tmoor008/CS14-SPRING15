@@ -4,167 +4,7 @@
 
 using namespace std;
 
-Node::Node(Type data)
-: data(data), next(0) 
-{}
-
-List::List()
-{
-    head = 0;
-    tail = 0;
-}
-
-List::List(List &list)
-{
-    head = 0;
-    tail = 0;
-    for (Node *curr = list.head; curr != 0; curr = curr->next)
-    {
-        push(curr->data);
-    }
-}
-
-List::~List()
-{
-    while(head != NULL)
-    {
-        Node *curr = head;
-        head = head->next;
-        delete curr;
-    }
-}
-
-List::List(const string &str)
-{
-    head = 0;
-    tail = 0;
-    stringstream ss;
-    ss << str;
-    char t;
-    
-    while (ss >> t)
-    {
-        push(t);
-    }
-}
-
-void List::display() const
-{
-    Node *temp = head;
-
-    if(head == 0)
-    {
-        cout << "";
-        return;
-    }
-    
-    cout << head->data;
-    temp = temp->next;
-    
-    while (temp != 0)
-    {
-        cout << " ";
-        cout << temp->data;
-        temp = temp->next;
-    }
-}
-
-void List::push(char val)
-{
-    if (head == 0)
-    {
-        head = new Node(val);
-        tail = head;
-    }
-    
-    else
-    {
-        Node *end = new Node(val);
-        tail->next = end;
-        tail = end;
-    }
-}
-
-void List::elementSwap(int pos)
-{
-    if (head == 0 || head->next == 0) //makes sure the list is > 1
-    {
-        cout << "Cannot swap on empty or size one list" << endl;
-        return;
-    }
-    
-    if (pos < 0) //makes sure negative position isnt entered
-    {
-        cout << "Cannot accept negative position, out of bounds" << endl;
-        return;
-    }
-    
-    int sz = 0; //size variable
-    
-    for (Node *curr = head; curr != 0; curr = curr->next)
-    {
-        ++sz; //increments to correct size
-    }
-    
-    if (pos >= sz - 1) //amkes sure position isnt out of bounds
-    {
-        cout << "One of the positions is out of bounds, cancelling swap" 
-            << endl;
-        return;
-    }
-    
-    if (head->next->next == 0) //if there are only two nodes
-    {
-        if (pos == 1) //makes sure not out of bounds
-        {
-            cout << "Position out of bounds, cancelling swap" << endl;
-            return;
-        }
-        Node *temp = head; //flips nodes
-        head = head->next;
-        head->next = temp;
-        temp->next = 0;
-        return;
-    }
-    
-    if (pos == 0) //flips the first and second node
-    {
-        Node *temp = head; //sets head and second node
-        Node *nxt = temp->next;
-        
-        head = nxt; //reassigns arrows
-        temp->next = nxt->next;
-        nxt->next = temp;
-        return;
-
-    }
-    
-    //cases for all other sized nodes and positions
-    
-    Node *temp = head; //saves current and previous nodes
-    Node *prev = head;
-    
-    for (int i = 0; i < pos - 1; ++i) //finds correct position
-    {
-        prev = prev->next;
-        temp = temp->next;
-    }
-    
-    temp = temp->next;
-    Node *nxt = temp->next; //saves next node
-    
-    if(nxt->next == 0) //resets tail if needed
-    {
-        tail = temp;
-    }
-    
-    prev->next = nxt; //reassigns arrows
-    temp->next = nxt->next;
-    nxt->next = temp;
-    
-}
-
-bool isPrime(int i)
+inline bool isPrime(int i)
 {
     if (i <= 1) //if i <= it is not prime; base case
     {
@@ -185,7 +25,7 @@ bool isPrime(int i)
     }
 }
 
-int primeCount(forward_list<int> lst, forward_list<Type>::iterator &itr)
+inline int primeCount(forward_list<int> lst, forward_list<int>::iterator &itr)
 {
     if (itr == lst.end()) //base case once the iterator reaches the end
     {
@@ -205,7 +45,7 @@ int primeCount(forward_list<int> lst, forward_list<Type>::iterator &itr)
     return -1; 
 }
 
-int primeCount(forward_list<int> lst)
+inline int primeCount(forward_list<int> lst)
 {
     forward_list<int>::iterator itr = lst.begin(); //starts iterator at beg
     
@@ -213,82 +53,6 @@ int primeCount(forward_list<int> lst)
     
     return total; //returns total # of primes
 }
-
-void listCopy(forward_list<Type> L, forward_list<Type> &P)
-{
-    forward_list<Type>::iterator itt; //creates an iterator to traverse list P
-    forward_list<Type> K; //temp to save P's vals
-    
-    for(itt = P.begin(); itt != P.end(); ++itt)
-    {
-        K.push_front(*itt); //push front values of P into K to reverse order
-    }
-    
-    P.resize(0); //resets P
-    
-    forward_list<Type>::iterator itt2; //iterator to traverse L
-    
-    for(itt2 = L.begin(); itt2 != L.end(); ++itt2)
-    {
-        P.push_front(*itt2); //push front values of L into P to reverse order
-    }
-    
-    forward_list<Type>::iterator itt3; //iterator to traverse K
-    
-    for(itt3 = K.begin(); itt3 != K.end(); ++itt3)
-    {
-        P.push_front(*itt3); //push front values of K into P to un-reverse order
-    }
-}
-
-void printLots(forward_list<Type> L, forward_list<int> P)
-{
-    int position = 0;
-    
-	forward_list<Type>::iterator it1 = L.begin(); //iterators
-	forward_list<int>::iterator it2 = P.begin();
-	
-	for (it1 = L.begin(); it1 != L.end(); it1++) // print each value in a list
-	{
-		if(it2 == P.end()) break;
-		if(*it2 == position)
-		{
-			cout << *it1 << ' '; //outputs value at P in L
-			it2++; //incrememnts P once found
-		}
-		position++; //incrememnts position in L
-	}
-	
-	forward_list<Type>::iterator it3;
-	int count = 0;
-	for (it3 = L.begin(); it3 != L.end(); ++it3) //finds size of the list
-	{
-	    ++count;
-	}
-	
-	forward_list<int>::iterator it4;
-	for(it4 = P.begin(); it4 != P.end(); ++it4) //checks if there are out of
-	                                            //bounds errors
-	{
-	    if (*it4 >= count)
-	    {
-	        cout << "Out of bounds position found, aborting." << endl;
-	        break;
-	    }
-	}
-	
-}
-
-void print(forward_list<Type> K)
-{
-    forward_list<Type>::iterator it;
-    
-    for(it = K.begin(); it != K.end(); ++it)
-    {
-        cout << *it << " ";
-    }
-}
-
 
 int main()
 {
@@ -309,9 +73,9 @@ int main()
     }
     cout << endl;
     
-    cout << "Tests listCopy: " << endl;
+    cout << "Tests listCopy int: " << endl;
     cout << "Empty second list case: " << endl;
-    forward_list<Type> l1;
+    forward_list<int> l1;
     l1.push_front(5);
     l1.push_front(3);
     l1.push_front(7);
@@ -319,14 +83,30 @@ int main()
     cout << "List 1: ";
     print(l1);
     cout << endl;
-    forward_list<Type> l2;
+    forward_list<int> l2;
     listCopy(l1, l2);
     cout << "List 2: ";
     print(l2);
     cout << endl << endl;
     
-    cout << "Filled second list case" << endl;
-    forward_list<Type> l3;
+    cout << "Tests listCopy char: " << endl;
+    cout << "Empty second list case: " << endl;
+    forward_list<char> t1;
+    t1.push_front('c');
+    t1.push_front('a');
+    t1.push_front('t');
+    t1.push_front('s');
+    cout << "List 1: ";
+    print(t1);
+    cout << endl;
+    forward_list<char> t2;
+    listCopy(t1, t2);
+    cout << "List 2: ";
+    print(t2);
+    cout << endl << endl;
+    
+    cout << "Filled second list case int" << endl;
+    forward_list<int> l3;
     l3.push_front(6);
     l3.push_front(2);
     l3.push_front(8);
@@ -334,7 +114,7 @@ int main()
     cout << "List 1: ";
     print(l3);
     cout << endl;
-    forward_list<Type> l4;
+    forward_list<int> l4;
     l4.push_front(5);
     l4.push_front(7);
     l4.push_front(11);
@@ -347,8 +127,30 @@ int main()
     print(l4);
     cout << endl << endl;
     
+     cout << "Filled second list case char" << endl;
+    forward_list<char> k3;
+    k3.push_front('m');
+    k3.push_front('o');
+    k3.push_front('l');
+    k3.push_front('b');
+    cout << "List 1: ";
+    print(k3);
+    cout << endl;
+    forward_list<char> k4;
+    k4.push_front('k');
+    k4.push_front('a');
+    k4.push_front('h');
+    k4.push_front('s');
+    cout << "List 2: ";
+    print(k4);
+    cout << endl; 
+    cout << "Copied List 2: ";
+    listCopy(k3, k4);
+    print(k4);
+    cout << endl << endl;
+    
     cout << "Tests printLots: " << endl;
-    forward_list<Type> l5;
+    forward_list<int> l5;
     l5.push_front(15);
     l5.push_front(18);
     l5.push_front(12);
@@ -369,7 +171,7 @@ int main()
     cout << endl << endl;
     
     cout << "Tests printLots: " << endl;
-    forward_list<Type> l7;
+    forward_list<int> l7;
     l7.push_front(23);
     l7.push_front(35);
     l7.push_front(67);
@@ -391,8 +193,29 @@ int main()
     printLots(l7, l8);
     cout << endl << endl;
     
+    cout << "Tests printLots char: " << endl;
+    forward_list<char> w5;
+    w5.push_front('n');
+    w5.push_front('o');
+    w5.push_front('l');
+    w5.push_front('e');
+    w5.push_front('m');
+    cout << "List 1(Inputs): ";
+    print(w5);
+    cout << endl;
+    forward_list<int> w6;
+    w6.push_front(4);
+    w6.push_front(2);
+    w6.push_front(0);
+    cout << "List 2 (Positions): ";
+    print(w6);
+    cout << endl; 
+    cout << "Printlots: ";
+    printLots(w5, w6);
+    cout << endl << endl;
+    
     cout << "Tests element swap" << endl;
-    List test3;
+    List<int> test3;
     test3.push(5); 
     test3.push(6); 
     test3.push(8);
@@ -406,8 +229,23 @@ int main()
     test3.display();
     cout << endl << "End" << endl << endl;
     
+    cout << "Tests element swap char" << endl;
+    List<char> tes3;
+    tes3.push('m'); 
+    tes3.push('e'); 
+    tes3.push('o');
+    tes3.push('w');
+    tes3.push('s');
+    cout << "List Before: ";
+    tes3.display();
+    cout << endl;
+    tes3.elementSwap(2);
+    cout << "List After: ";
+    tes3.display();
+    cout << endl << "End" << endl << endl;
+    
     cout << "Tests element swap sz 1" << endl;
-    List test4;
+    List<int> test4;
     test4.push(5); 
     cout << "List Before: ";
     test4.display();
@@ -418,7 +256,7 @@ int main()
     cout << endl << "End" << endl << endl;
     
     cout << "Tests element swap sz 2, pos 0" << endl;
-    List test5;
+    List<int> test5;
     test5.push(57); 
     test5.push(12);
     cout << "List Before: ";
@@ -430,7 +268,7 @@ int main()
     cout << endl << "End" << endl << endl;
     
     cout << "Tests element swap sz 2, pos 1" << endl;
-    List test6;
+    List<int> test6;
     test6.push(35); 
     test6.push(68);
     cout << "List Before: ";
@@ -442,7 +280,7 @@ int main()
     cout << endl << "End" << endl << endl;
     
     cout << "Tests element swap end" << endl;
-    List test7;
+    List<int> test7;
     test7.push(22); 
     test7.push(7);
     test7.push(35);
@@ -457,7 +295,7 @@ int main()
     cout << endl << "End" << endl << endl;
     
     cout << "Tests primeCount function" << endl;
-    forward_list<Type> l9;
+    forward_list<int> l9;
     l9.push_front(23);
     l9.push_front(15);
     l9.push_front(8);
@@ -469,7 +307,7 @@ int main()
     cout << endl;
     
     cout << "Tests primeCount function" << endl;
-    forward_list<Type> l10;
+    forward_list<int> l10;
     l10.push_front(35);
     l10.push_front(13);
     l10.push_front(29);
