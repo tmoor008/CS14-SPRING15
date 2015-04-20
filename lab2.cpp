@@ -84,24 +84,30 @@ int main()
     print(l1);
     cout << endl;
     forward_list<int> l2;
-    listCopy(l1, l2);
     cout << "List 2: ";
+    print(l2);
+    listCopy(l1, l2);
+    cout << endl;
+    cout << "Copied List 2: ";
     print(l2);
     cout << endl << endl;
     
     cout << "Tests listCopy char: " << endl;
-    cout << "Empty second list case: " << endl;
+    cout << "Empty first list case: " << endl;
     forward_list<char> t1;
-    t1.push_front('c');
-    t1.push_front('a');
-    t1.push_front('t');
-    t1.push_front('s');
     cout << "List 1: ";
     print(t1);
     cout << endl;
     forward_list<char> t2;
-    listCopy(t1, t2);
+    t2.push_front('c');
+    t2.push_front('a');
+    t2.push_front('t');
+    t2.push_front('s');
     cout << "List 2: ";
+    print(t2);
+    cout << endl;
+    cout << "Copied List 2: ";
+    listCopy(t1, t2);
     print(t2);
     cout << endl << endl;
     

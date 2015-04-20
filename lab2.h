@@ -1,7 +1,7 @@
 //Name: Tia Moore
 //SID: 861144845
 //Date: 4/18/15
-//Approach:
+//Approach: 
 
 #ifndef __LAB2_H__
 #define __LAB2_H__
@@ -10,12 +10,10 @@
 #include <sstream>
 #include <forward_list>
 
-// typedef int Type;
-
 using namespace std;
 
 template <typename Type>
-class Node
+class Node //Node and List classes and implementations taken from prev Lab
 {
     private:
         template <typename T> friend class List;
@@ -37,12 +35,12 @@ class List
         Node<Type> *tail;
     
     public:
-        List()
+        List() //constructor
         {
             head = 0;
             tail = 0;
         }
-        List(List &list)
+        List(List &list) //copy constructor
         {
             head = 0;
             tail = 0;
@@ -51,7 +49,7 @@ class List
                 push(curr->data);
             }
         }
-        ~List()
+        ~List() //destructor
         {
             while(head != NULL)
             {
@@ -60,7 +58,7 @@ class List
                 delete curr;
             }
         }
-        List(const string &str)
+        List(const string &str) //str constructor
         {
             head = 0;
             tail = 0;
@@ -73,7 +71,7 @@ class List
                 push(t);
             }
         }
-        void display() const
+        void display() const //displays list
         {
             Node<Type> *temp = head;
 
@@ -93,7 +91,7 @@ class List
                 temp = temp->next;
             }
         }
-        void push(Type val)
+        void push(Type val) //pushes values onto back of list
         {
             if (head == 0)
             {
@@ -108,7 +106,7 @@ class List
                 tail = end;
             }
         }
-        void elementSwap(int pos)
+        void elementSwap(int pos) //swaps the elements in two positions
         {
             if (head == 0 || head->next == 0) //makes sure the list is > 1
             {
@@ -129,7 +127,7 @@ class List
                 ++sz; //increments to correct size
             }
             
-            if (pos >= sz - 1) //amkes sure position isnt out of bounds
+            if (pos >= sz - 1) //makes sure position isnt out of bounds
             {
                 cout << "One of the positions is out of bounds, cancelling swap" 
                     << endl;
@@ -187,6 +185,7 @@ class List
         }
 };
 
+//non-template function declarations
 bool isPrime(int i);
 int primeCount(forward_list<int> lst, forward_list<int>::iterator &itr);
 int primeCount(forward_list<int> lst);
@@ -194,10 +193,6 @@ int primeCount(forward_list<int> lst);
 template <typename Type>
 void listCopy(forward_list<Type> L, forward_list<Type> &P)
 {
-    if (P.begin() == P.end())
-    {
-        return;
-    }
     class forward_list<Type>::iterator itt; //creates an iterator to traverse list P
     forward_list<Type> K; //temp to save P's vals
     
@@ -226,7 +221,25 @@ void listCopy(forward_list<Type> L, forward_list<Type> &P)
 template <typename Type>
 void printLots(forward_list<Type> L, forward_list<int> P)
 {
-    int position = 0;
+    class forward_list<Type>::iterator it3; //iterator to check list
+	int count = 0;
+	for (it3 = L.begin(); it3 != L.end(); ++it3) //finds size of the list
+	{
+	    ++count;
+	}
+	
+	forward_list<int>::iterator it4; //iterator to check bounds
+	for(it4 = P.begin(); it4 != P.end(); ++it4) //checks if there are out of
+	                                            //bounds errors
+	{
+	    if (*it4 >= count || *it4 < 0)
+	    {
+	        cout << "Out of bounds position found, aborting." << endl;
+	        return;
+	    }
+	}
+	
+    int position = 0; //sets positionto zero
     
 	class forward_list<Type>::iterator it1 = L.begin(); //iterators
 	forward_list<int>::iterator it2 = P.begin();
@@ -242,32 +255,15 @@ void printLots(forward_list<Type> L, forward_list<int> P)
 		position++; //incrememnts position in L
 	}
 	
-	class forward_list<Type>::iterator it3;
-	int count = 0;
-	for (it3 = L.begin(); it3 != L.end(); ++it3) //finds size of the list
-	{
-	    ++count;
-	}
-	
-	forward_list<int>::iterator it4;
-	for(it4 = P.begin(); it4 != P.end(); ++it4) //checks if there are out of
-	                                            //bounds errors
-	{
-	    if (*it4 >= count)
-	    {
-	        cout << "Out of bounds position found, aborting." << endl;
-	        break;
-	    }
-	}
-	
 }
 
 template <typename Type>
-void print(forward_list<Type> K)
+void print(forward_list<Type> K) //Print function to display forward_lists
 {
     class forward_list<Type>::iterator it;
     
-    for(it = K.begin(); it != K.end(); ++it)
+    for(it = K.begin(); it != K.end(); ++it) //iterates through list and displays
+                                            //each element
     {
         cout << *it << " ";
     }
