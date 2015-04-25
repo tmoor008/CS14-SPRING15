@@ -293,7 +293,7 @@ class TwoStackOptimal
             int i;
             for (i = 0; i < top1; ++i)
             {
-                cout << arr[i];
+                cout << arr[i] << " ";
             }
             int k;
             for (k = i; k <= top2; ++k)
@@ -303,7 +303,7 @@ class TwoStackOptimal
             
             for (int j = k; j < sz; ++j)
             {
-                cout << arr[j];
+                cout << arr[j] << " ";
             }
             cout << endl;
         }
@@ -329,7 +329,7 @@ void showTowerStates(int n, char from, char to, char aux)
 {
     if (n == 1)
     {
-        cout << "Moved " << n << " from Peg " << from << " to Peg" << to << endl;
+        cout << "Moved " << n << " from Peg " << from << " to Peg " << to << endl;
         return;
     }
     
