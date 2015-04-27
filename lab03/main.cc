@@ -76,8 +76,8 @@ int main()
     test2.pushFlexStack2(62);
     test2.pushFlexStack2(47);
     test2.pushFlexStack2(96);
-    // test2.pushFlexStack2(22);
-    // test2.pushFlexStack2(11); //will go out of bounds bc run out of room
+    test2.pushFlexStack2(22);
+    test2.pushFlexStack2(11); //will go out of bounds bc run out of room
     cout << endl << endl;
     
     cout << "Tests pop on stack1: " << endl;

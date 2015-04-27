@@ -158,7 +158,7 @@ class TwoStackFixed
             int k;
             for (k = i; k <= top2; ++k)
             {
-                cout << " _ ";
+                cout << " ";
             }
             
             for (int j = k; j < sz; ++j)
@@ -293,17 +293,17 @@ class TwoStackOptimal
             int i;
             for (i = 0; i < top1; ++i)
             {
-                cout << arr[i] << " ";
+                cout << arr[i];
             }
             int k;
             for (k = i; k <= top2; ++k)
             {
-                cout << " _ ";
+                cout << " ";
             }
             
             for (int j = k; j < sz; ++j)
             {
-                cout << arr[j] << " ";
+                cout << arr[j];
             }
             cout << endl;
         }
