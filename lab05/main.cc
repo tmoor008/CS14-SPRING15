@@ -1,7 +1,19 @@
 //Name: Tia Moore
 //SID: 861144845
-//Date: 5/5/15
-//Approach: 
+//Date: 5/8/15
+//Approach: In this lab, I implemented serveral functions for a BST. One 
+//function was the findMinCover which checks the values within the tree that
+//must be selected in order to cover all the edges. I used two helper functions,
+//one which selected the necessary parents of leaf nodes and another which 
+//checked for any remaining nodes which needed to be selected to cover all 
+//edges. Both used recursive calls to traverse the tree and if statements as 
+//checkers. I then used a display helper function to display the minCover nodes.
+//I also implemented a recursive findSumPaths function which finds the paths
+//that add up to a given sum. The code uses several checkers, recursive calls
+//and a print function to implement. Lastly, I created a vertSum function which
+//found the sum of all the vertical-wise nodes. The code recursively calls 
+//itself and finds the index at which each node is at. Each nodes value is
+//then added into a map at the index position. Finally, the sums are output.
 
 #include <iostream>
 #include <map>

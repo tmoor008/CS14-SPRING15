@@ -1,6 +1,6 @@
 //Name: Tia Moore
 //SID: 861144845
-//Date: 5/5/15
+//Date: 5/8/15
 //Approach: In this lab, I implemented serveral functions for a BST. One 
 //function was the findMinCover which checks the values within the tree that
 //must be selected in order to cover all the edges. I used two helper functions,
