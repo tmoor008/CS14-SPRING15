@@ -71,7 +71,7 @@ int main()
 	cout << "Part 2" << endl;
 	test3.findSumPath(test3.root, 22, buffer2);
 	cout << "Part 3" << endl;
-	test3.vertSum(test2.root, 0, m2);
+	test3.vertSum(test3.root, 0, m2);
 	cout << endl;
 	
 	//testcase that shouldnt find a path
@@ -90,10 +90,43 @@ int main()
 	cout << "Part 1" << endl;
 	test4.minCover();
 	cout << "Part 2" << endl;
-	test4.findSumPath(test3.root, 61, buffer3);
+	test4.findSumPath(test4.root, 61, buffer3);
 	cout << "Part 3" << endl;
-	test4.vertSum(test2.root, 0, m3);
+	test4.vertSum(test4.root, 0, m3);
+	cout << endl;
+	
+	cout << "Testcase 5" << endl;
+    BST<int> test5;
+    map<int, int> m4;
+    int buffer4[100];
+	test5.insert(12);
+	test5.insert(10);
+	test5.insert(3);
+	test5.insert(13);
+	cout << "Part 1" << endl;
+	test5.minCover();
+	cout << "Part 2" << endl;
+	test5.findSumPath(test5.root, 25, buffer4);
+	cout << "Part 3" << endl;
+	test5.vertSum(test5.root, 0, m4);
+    cout << endl;
     
+    cout << "Testcase 6" << endl;
+    BST<int> test6;
+    map<int, int> m5;
+    int buffer5[100];
+	test6.insert(8);
+	test6.insert(5);
+	test6.insert(4);
+	test6.insert(2);
+	test6.insert(6);
+	test6.insert(11);
+	cout << "Part 1" << endl;
+	test6.minCover();
+	cout << "Part 2" << endl;
+	test6.findSumPath(test6.root, 19, buffer5);
+	cout << "Part 3" << endl;
+	test6.vertSum(test6.root, 0, m5);
     
     
     return 0;
