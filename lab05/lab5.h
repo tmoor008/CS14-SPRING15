@@ -444,57 +444,48 @@ class BST
     	    cout << endl;
     	}
     	
-    	void print(int buffer[], int count, int checker)
+    	void print(int buffer[], int count)
     	{
-    		if (checker > 0) //fixes leftover in buffer
-    		{
-    			buffer[1] = 0;
-    		}
-    		vector<int> v; //uses vector to sort values
-    		for (int i = 0; i < count; ++i)
-    		{
-    			v.push_back(buffer[i]); //places buffer vals into a vector
-    		}
+    		vector<int> v;//creates vector to store and sort vals
     		
-    		std::sort(v.begin(), v.end()); //sorts the vector
-    		
-    		for (int j = 0; j < count; ++j)
-    		{
-    			cout << v.at(j) << " "; //outputs the sorted values
-    		}
-    		cout << endl;
+	        for(unsigned i = 0; i < count; ++i) //puts values into a vector
+	        {
+	            v.push_back(buffer[i]);
+	        }
+	        
+	        std::sort(v.begin(), v.end()); //sorts the values
+	        
+	        for(unsigned i = 0; i < v.size(); ++i)
+	        {
+	            cout << v.at(i) << ' '; //outputs the values
+	        }
+	        cout << endl;
     	}
     	
     	void findSumPath(Node* n, int sum, int buffer[], int count, int &checker)
 		{
-			if (!n) return; //base case to return
+			if(!n) return; //base case
 			
-			buffer[count] = n->value;
+			buffer[count] = n->value; // adds node to the buffer
 			
-			if (((sum - n->value) > 0 || (sum - n->value) < 0) && n->isLeaf())
+			if(sum - n->value == 0 && n->isLeaf()) // 
 			{
-				count = 0; //resets if leaf and no path reached
+			    count = count + 1; // updates coutner
+			    buffer[count] = n->value; //last node placed in buffer
+			    print(buffer, count); //calls the print function
+			    ++checker; //increments to see if path is found
+			    count = 0; //resets the count
 			}
 			
-			//recursively calls left
-			findSumPath(n->left, sum - n->value, buffer, ++count, checker);
-			if ((sum - n->value) == 0 && n->isLeaf()) //checks if path found
+			//checks if a leaf is reached and the sum was not found
+			if(((sum - n->value) < 0 || (sum - n->value) > 0) && n->isLeaf())
 			{
-				// cout << "Entered" << endl;
-				// // count = count + 1;
-				// // buffer[count] = n->value;
-				// for (int i = 0; i < count; ++i)
-				// {
-				// 	cout << buffer[i] << " ";
-				// }
-				// cout << endl;
-				print(buffer, count, checker); //calls print
-				++checker; //increments checker
-				count = 0; //resets count
-				// buffer = new int[100];
+			    count = 0;
 			}
-			findSumPath(n->right, sum - n->value, buffer, ++count, checker);
-			//recursively calls right
+			
+			// recursive calls on the left and right
+			findSumPath(n->left, sum - n->value, buffer, count + 1, checker);
+			findSumPath(n->right, sum - n->value, buffer, count + 1, checker);
 		}
     	
 		void findSumPath(Node* n, int sum, int buffer[])
