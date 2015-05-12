@@ -1,7 +1,26 @@
 //Name: Tia Moore
 //SID: 861144845
-//Date: 5/8/15
-//Approach:
+//Date: 5/12/15
+//Approach: In this lab, I implemented a selection sort algorithm using 
+//iterators which works with several std containers (specifically tested are 
+//list, vector, and array). My code first calls the selectionsort fuction from
+//main which then calls one of the helper functions. The call to the helper
+//function will determine which type of container it is being called on and 
+//use the appropriate helper function. Each helper function has three main
+//sections. First, a for loop using iterators will traverse the container and
+//output its original, unsorted state (using either *itr or itr->first and
+//itr->second depending on if a pair type is called). Next, an iterator to 
+//keep track of the minimum value is declared and a counter is also declared to
+//keep track of how many moves it takes to sort. Then the actual sort function
+//is implemented using nested for loops. The first for loop iterates through 
+//the container and sets the min iterator to the current value its on. Then the
+//nested for loops iterates through the list at the next index, checking if
+//any of the values are smaller. If a smaller value is found, the min is set to
+//it. Then it breaks out of the for loop and goes to an if statement that 
+//determines whether a swap should be made (as long as the two vals arent the
+//same) and increments the counter. Then another for loop iterates through
+//the now sorted container, outputting its contents Lastly, the number of moves
+//made is output via the counter.
 
 #ifndef __SELECTIONSORT_H__
 #define __SELECTIONSORT_H__

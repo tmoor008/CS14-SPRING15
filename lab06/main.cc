@@ -1,3 +1,26 @@
+//Name: Tia Moore
+//SID: 861144845
+//Date: 5/12/15
+//Approach: In this lab, I implemented a selection sort algorithm using 
+//iterators which works with several std containers (specifically tested are 
+//list, vector, and array). My code first calls the selectionsort fuction from
+//main which then calls one of the helper functions. The call to the helper
+//function will determine which type of container it is being called on and 
+//use the appropriate helper function. Each helper function has three main
+//sections. First, a for loop using iterators will traverse the container and
+//output its original, unsorted state (using either *itr or itr->first and
+//itr->second depending on if a pair type is called). Next, an iterator to 
+//keep track of the minimum value is declared and a counter is also declared to
+//keep track of how many moves it takes to sort. Then the actual sort function
+//is implemented using nested for loops. The first for loop iterates through 
+//the container and sets the min iterator to the current value its on. Then the
+//nested for loops iterates through the list at the next index, checking if
+//any of the values are smaller. If a smaller value is found, the min is set to
+//it. Then it breaks out of the for loop and goes to an if statement that 
+//determines whether a swap should be made (as long as the two vals arent the
+//same) and increments the counter. Then another for loop iterates through
+//the now sorted container, outputting its contents Lastly, the number of moves
+//made is output via the counter.
 #include "selectionsort.h"
 #include <iostream>
 #include <vector>
@@ -9,7 +32,7 @@ using namespace std;
 int main()
 {
     cout << " - Sample Output - " << endl;
-    vector<int> v;
+    vector<int> v; //tests regular vector
     v.push_back(2);
     v.push_back(4);
     v.push_back(5);
@@ -18,10 +41,10 @@ int main()
     v.push_back(9);
     selectionsort(v);
     
-    vector<int> vv;
+    vector<int> vv; //tests empty
     selectionsort(vv);
     
-    vector<pair<int, int>> p;
+    vector<pair<int, int>> p; //tests vector of pairs
     pair<int, int> p1(1, 2);
     pair<int, int> p2(3, -1);
     pair<int, int> p3(-1, 3);
@@ -40,7 +63,7 @@ int main()
     p.push_back(p8);
     selectionsort(p);
     
-    list<pair<int, int>> w;
+    list<pair<int, int>> w; //tests list of pairs
     pair<int, int> w1(10, 2);
     pair<int, int> w2(-3, -1);
     pair<int, int> w3(-8, 0);
@@ -65,7 +88,7 @@ int main()
     w.push_back(w11);
     selectionsort(w);
     
-    vector<pair<int, int>> q;
+    vector<pair<int, int>> q; //tests vector of pairs
     pair<int, int> q1(-1, 3);
     pair<int, int> q2(0 ,0);
     pair<int, int> q3(1, -2);
@@ -85,7 +108,7 @@ int main()
     selectionsort(q);
     
     cout <<  " - Extra Tests - " << endl;
-    list<int> l;
+    list<int> l; //tests plain list
     l.push_back(3);
     l.push_back(7);
     l.push_back(1);
@@ -97,7 +120,7 @@ int main()
     l.push_back(8);
     selectionsort(l);
     
-    int arr[8];
+    int arr[8]; //tests an array
     arr[0] = 7;
     arr[1] = 4;
     arr[2] = 9;

@@ -15,4 +15,4 @@ relative positioning to each other. In this way, my selectionsort function
 is a stable sort. 
 
 Part B: In order to implement the program, I placed this section in main.cc
-along with commented code expalining why each test proves stability. 
+along with commented code explaining why each test proves stability. 
