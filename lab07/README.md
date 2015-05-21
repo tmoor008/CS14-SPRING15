@@ -25,6 +25,8 @@ Disadvantages
 
 What else might you like to be able to measure to compare the
 two data structures?
+- You may want to measure the time difference in iterating through
+  the two differrent types.
 - You may want to test the runtime of the 
   erase operation to see which one is more efficient.
 - You may also want to test the runtime of the swap operation to see
