@@ -60,13 +60,13 @@ void run(T &t, vector<string> words, int n, vector<chrono::milliseconds> &i_time
     		//a single find and pushes tht into a vector to get avg
 
     		t.clear(); //clears t to start over
+    		std::random_shuffle(words.begin(), words.end());
+    	    //shuffles the words vector to test 
     	}
     	i_time.push_back(getAvg(temp_i)); 
     	f_time.push_back(getAvg(temp_f));
     	//takes the avg of a single j iteration
     	//and pushes it into the time vectors to later take the overall avg
-    	std::random_shuffle(words.begin(), words.end());
-    	//shuffles the words vector to test 
     }
 }
 
