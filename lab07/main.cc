@@ -1,3 +1,21 @@
+//Name: Tia Moore
+//SID: 861144845
+//Date: 5/21/15
+//Approach: In this lab I test the run times of a self-balancing tree (set) and
+//a hash table (unordered set) of both their isnert and finds. I created a function
+//called run which takes in a template to use either set or unordered set as well
+//as a given n value to start from, the vector full of the words needed and 
+//two vectors of chrono::milliseconds to store the time averages. My code 
+//uses nested for loops, the outer one incrementing n by 5000 and the inner iterating
+//through each n 10 times to get accurate results. The inner for loop uses
+//chrono time and a for loop to first test the insert function. It then stores
+//the amt / n in a temp vector and does the same process for find. The template
+//value is then cleared and the words vector is shuffled. The outer loop then
+//stores the avgs of each n iteration. In main, the avg of the vectors of find
+//and insert are stored and then outputted to an outfile. 
+
+//CALL USING: ./a.out words.txt 5000 data.txt
+
 #include <iostream>
 #include <unordered_set>
 #include <set>
